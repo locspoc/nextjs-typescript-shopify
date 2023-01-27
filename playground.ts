@@ -9,6 +9,10 @@ interface Person {
 	age: number;
 }
 
+// interface PersonLoggerFn {
+// 	(name: string, age: number): string;
+// }
+
 // Option 2: types - use to create type aliases e.g. type Data = string can not be done with interfaces
 // types are better for describing functions
 
@@ -17,10 +21,12 @@ interface Person {
 // 	age: number;
 // };
 
-type Data = string;
+// type Data = string;
+
+type PersonLoggerFn = (name: string, age: number) => string;
 
 export default function play() {
-	const name: Data = 'Filip';
+	const name: string = 'Filip';
 	const age: number = 30;
 
 	const person: Person = {
@@ -28,12 +34,20 @@ export default function play() {
 		age: 34,
 	};
 
-	function logPersonInfo(personName: string, personAge: number) {
-		// const info = "Name: " + personName + ", age: " + personAge;
+	// function logPersonInfo(personName: string, personAge: number): string {
+	// 	const info = `Name: ${personName}, age: ${personAge}`;
+	// 	console.log(info);
+	// 	return info;
+	// }
+
+	const logPersonInfo: PersonLoggerFn = (
+		personName: string,
+		personAge: number
+	): string => {
 		const info = `Name: ${personName}, age: ${personAge}`;
 		console.log(info);
 		return info;
-	}
+	};
 
 	function logPersonInfo2(person: { name: string; age: number }) {
 		// const info = "Name: " + personName + ", age: " + personAge;
@@ -42,6 +56,6 @@ export default function play() {
 		return info;
 	}
 
-	logPersonInfo(name, age);
+	const log: string = logPersonInfo(name, age);
 	logPersonInfo2(person);
 }
