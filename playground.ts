@@ -1,19 +1,26 @@
 // Playground Examples
 
-// Option 1
+// TS recommends to use interface over types
+
+// Option 1: interfaces describe data structures in a more natural way
+// Describing objects e.g. shipments, orders
 interface Person {
 	name: string;
 	age: number;
 }
 
-// Option 2
+// Option 2: types - use to create type aliases e.g. type Data = string can not be done with interfaces
+// types are better for describing functions
+
 // type Person = {
 // 	name: string;
 // 	age: number;
 // };
 
+type Data = string;
+
 export default function play() {
-	const name: string = 'Filip';
+	const name: Data = 'Filip';
 	const age: number = 30;
 
 	const person: Person = {
