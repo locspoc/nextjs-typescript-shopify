@@ -1,13 +1,33 @@
 // Playground Examples
 
+interface Person {
+	name: string;
+	age: number;
+}
+
+interface AcademicPerson extends Person {
+	publications: string[];
+}
+
+interface BusinessPerson extends Person {
+	salary: number;
+}
+
 export default function play() {
-	const random = Math.random() > 0.5 ? 'hello' : [1, 2];
+	const person1: AcademicPerson = {
+		name: 'filip',
+		age: 23,
+		publications: ['1', '2'],
+	};
 
-	if (typeof random === 'string') {
-		const upper = random.toUpperCase();
-	} else {
-		console.log(random);
-	}
+	const person2: BusinessPerson = {
+		name: 'john',
+		age: 25,
+		salary: 100000,
+	};
 
-	console.log(random.length);
+	function logPerson(person: Person) {}
+
+	logPerson(person1);
+	logPerson(person2);
 }
