@@ -1,74 +1,72 @@
 // Playground Examples
 
-// TS recommends to use interface over types
-
-// Option 1: interfaces describe data structures in a more natural way
-// Describing objects e.g. shipments, orders
-
-// interface Person {
-// 	name: string;
-// 	age: number;
-// }
-
-// interface PersonLoggerFn {
-// 	(name: string, age: number): string;
-// }
-
-class Person {
-	name: string = '';
-	age?: number = 0;
-
-	constructor(name: string, age: number) {
-		this.name = name;
-		this.age = age;
-	}
+interface Person {
+	kind: 'business' | 'academic' | 'otherType';
+	name: string;
+	age: number;
 }
 
-// Option 2: types - use to create type aliases e.g. type Data = string can not be done with interfaces
-// types are better for describing functions
+interface AcademicPerson extends Person {
+	kind: 'academic';
+	publications: string[];
+}
 
-// type Person = {
-// 	name: string;
-// 	age: number;
-// };
+interface BusinessPerson extends Person {
+	kind: 'business';
+	salary: number;
+}
 
-// type Data = string;
+type Human =
+	| BusinessPerson
+	| AcademicPerson
+	| {
+			kind: 'otherType';
+			special: string;
+	  };
 
-type PersonLoggerFn = (name: string, age?: number) => string;
+type RaceCar = {
+	name: string;
+	maxSpeed: 200;
+	team: string;
+};
+
+type CityCar = {
+	name: string;
+	space: string;
+	maxSpeed: 100;
+};
+
+type Car = RaceCar | CityCar;
 
 export default function play() {
-	const name: string = 'Filip';
-	const age: number = 30;
-
-	const john: Person = {
-		name: 'John',
+	const car: RaceCar = {
+		name: 'Race Car',
+		maxSpeed: 200,
+		team: 'ferrari',
 	};
 
-	// function logPersonInfo(personName: string, personAge: number): string {
-	// 	const info = `Name: ${personName}, age: ${personAge}`;
-	// 	console.log(info);
-	// 	return info;
-	// }
-
-	const logPersonInfo: PersonLoggerFn = (
-		personName: string,
-		personAge: number = 0
-	): string => {
-		const info = `Name: ${personName}, age: ${personAge}`;
-		console.log(info);
-		return info;
-	};
-
-	function logPersonInfo2(person: Person) {
-		// const info = "Name: " + personName + ", age: " + personAge;
-		const info = `Name: ${person.name}, age: ${person.age}`;
-		console.log(info);
-		return info;
+	function logPersonInfo(human: Human) {
+		if (human.kind === 'academic') {
+			console.log(human);
+		} else if (human.kind === 'business') {
+			console.log(human);
+		} else if (human.kind === 'otherType') {
+			console.log(human);
+		} else {
+			console.log(human);
+		}
 	}
 
-	const log = logPersonInfo(name);
-
-	const person = new Person('Edward', 50);
-
-	logPersonInfo2(person);
+	function logCarInfo(car: Car) {
+		switch (car.maxSpeed) {
+			case 200:
+				console.log(car.team);
+				break;
+			case 100:
+				console.log(car.space);
+				break;
+			default:
+				console.log(car);
+		}
+	}
 }
