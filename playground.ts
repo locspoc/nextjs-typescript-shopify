@@ -13,21 +13,22 @@ interface BusinessPerson extends Person {
 	salary: number;
 }
 
+type Car = {
+	name: string;
+};
+
+type RaceCar = {
+	speed: number;
+} & Car & { mileage: number };
+
 export default function play() {
-	const person1: AcademicPerson = {
-		name: 'filip',
-		age: 23,
-		publications: ['1', '2'],
+	const car: RaceCar = {
+		name: 'my car',
+		speed: 100,
+		mileage: 200,
 	};
 
-	const person2: BusinessPerson = {
-		name: 'john',
-		age: 25,
-		salary: 100000,
-	};
+	function logCar(car: Car) {}
 
-	function logPerson(person: Person) {}
-
-	logPerson(person1);
-	logPerson(person2);
+	logCar(car);
 }
