@@ -6,6 +6,11 @@ interface Person {
 	age: number;
 }
 
+interface Person {
+	prop1: string;
+	prop2: number;
+}
+
 interface AcademicPerson extends Person {
 	kind: 'academic';
 	publications: string[];
@@ -43,6 +48,14 @@ export default function play() {
 		name: 'Race Car',
 		maxSpeed: 200,
 		team: 'ferrari',
+	};
+
+	const person: Person = {
+		prop1: '',
+		prop2: 2,
+		name: '',
+		kind: 'academic',
+		age: 23,
 	};
 
 	function logPersonInfo(human: Human) {
