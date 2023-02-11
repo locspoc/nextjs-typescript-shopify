@@ -41,7 +41,13 @@ type CityCar = {
 	maxSpeed: 100;
 };
 
-type Car = RaceCar | CityCar;
+type SUVCar = {
+	name: string;
+	maxSpeed: 150;
+	isCarbonFree: boolean;
+};
+
+type Car = RaceCar | CityCar | SUVCar;
 
 export default function play() {
 	const car: RaceCar = {
@@ -57,6 +63,17 @@ export default function play() {
 		kind: 'academic',
 		age: 23,
 	};
+
+	function printInfo(someObject: {
+		[key: string]: string | number | boolean;
+	}) {}
+
+	printInfo({
+		age: 23,
+		isMarried: true,
+		name: 'Filip',
+		records: {},
+	});
 
 	function logPersonInfo(human: Human) {
 		if (human.kind === 'academic') {
@@ -78,8 +95,12 @@ export default function play() {
 			case 100:
 				console.log(car.space);
 				break;
+			case 150:
+				console.log(car.isCarbonFree);
+				break;
 			default:
-				console.log(car);
+				const _never: never = car;
+				return _never;
 		}
 	}
 }
