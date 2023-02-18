@@ -1,35 +1,40 @@
 // Playground Examples
 
 interface Person {
-	kind: 'business' | 'academic' | 'otherType';
 	name: string;
 	age: number;
 }
 
-interface Person {
-	prop1: string;
-	prop2: number;
-}
-
-interface AcademicPerson extends Person {
-	kind: 'academic';
-	publications: string[];
-}
-
-interface BusinessPerson extends Person {
-	kind: 'business';
-	salary: number;
-}
-
-type Noop = () => any;
-type Noop2 = () => void;
-
-export default function play() {
-	function iterate(items: Array<any>) {
+class Logger<T> {
+	log(items: Array<T>, callback: (i: T) => void) {
 		items.forEach((item) => {
-			console.log(item.toUpperCase());
+			console.log(item);
 		});
 	}
+}
 
-	iterate(['filip', 'john', 'tom']);
+export default function play() {
+	const logger = new Logger<string>();
+
+	const cars = ['auldi', 'skoda', 'citreon'];
+	logger.log(cars, (car) => {
+		console.log(car);
+	});
+
+	const logger2 = new Logger<number>();
+
+	const numbers = [1, 2, 3, 4];
+	logger2.log(numbers, (num) => {
+		console.log(num);
+	});
+
+	const logger3 = new Logger<Person>();
+
+	const persons = [
+		{ name: 'filip', age: 30 },
+		{ name: 'john', age: 25 },
+	];
+	logger3.log(persons, (num) => {
+		console.log(num);
+	});
 }
