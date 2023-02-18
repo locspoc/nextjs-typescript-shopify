@@ -1,36 +1,45 @@
 // Playground Examples
 
 interface Person {
-	kind: 'business' | 'academic' | 'otherType';
 	name: string;
+}
+
+interface Student extends Person {
 	age: number;
 }
 
-interface Person {
-	prop1: string;
-	prop2: number;
+interface PostGraduateStudent extends Person {
+	age: number;
+	projects: string[];
 }
 
-interface AcademicPerson extends Person {
-	kind: 'academic';
-	publications: string[];
-}
+type StudentInfo<T extends any = Student> = T extends Student
+	? {
+			data: T;
+			grades: number[];
+	  }
+	: string;
 
-interface BusinessPerson extends Person {
-	kind: 'business';
-	salary: number;
-}
+// interface StudentInfo<T extends Student = Student> {
+// 	data: T;
+// 	grades: number[];
+// }
 
-type Noop = () => any;
-type Noop2 = () => void;
+type Car = { engine: string };
 
 export default function play() {
-	function fn1(x: Noop): void {
-		const result = x();
-		result();
+	function logStudentInfo(info: StudentInfo<Car>) {
+		console.log(info);
+		console.log(info);
 	}
-	function fn2(x: Noop2): void {
-		const result = x();
-		result();
-	}
+
+	const info = {
+		data: {
+			name: 'Filip',
+			age: '',
+		},
+		grades: [1, 2, 3, 1],
+	};
+
+	logStudentInfo(info);
 }
