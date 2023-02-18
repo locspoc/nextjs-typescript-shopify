@@ -6,6 +6,11 @@ interface Person {
 	age: number;
 }
 
+interface Person {
+	prop1: string;
+	prop2: number;
+}
+
 interface AcademicPerson extends Person {
 	kind: 'academic';
 	publications: string[];
@@ -16,57 +21,16 @@ interface BusinessPerson extends Person {
 	salary: number;
 }
 
-type Human =
-	| BusinessPerson
-	| AcademicPerson
-	| {
-			kind: 'otherType';
-			special: string;
-	  };
-
-type RaceCar = {
-	name: string;
-	maxSpeed: 200;
-	team: string;
-};
-
-type CityCar = {
-	name: string;
-	space: string;
-	maxSpeed: 100;
-};
-
-type Car = RaceCar | CityCar;
+type Noop = () => any;
+type Noop2 = () => void;
 
 export default function play() {
-	const car: RaceCar = {
-		name: 'Race Car',
-		maxSpeed: 200,
-		team: 'ferrari',
-	};
-
-	function logPersonInfo(human: Human) {
-		if (human.kind === 'academic') {
-			console.log(human);
-		} else if (human.kind === 'business') {
-			console.log(human);
-		} else if (human.kind === 'otherType') {
-			console.log(human);
-		} else {
-			console.log(human);
-		}
+	function fn1(x: Noop): void {
+		const result = x();
+		result();
 	}
-
-	function logCarInfo(car: Car) {
-		switch (car.maxSpeed) {
-			case 200:
-				console.log(car.team);
-				break;
-			case 100:
-				console.log(car.space);
-				break;
-			default:
-				console.log(car);
-		}
+	function fn2(x: Noop2): void {
+		const result = x();
+		result();
 	}
 }
