@@ -2,12 +2,11 @@ interface Person {
 	name: string;
 }
 
-type SingleType<T> = T extends any[] ? T[number] : unknown;
+type CustomArray<T> = {
+	[index: number]: T;
+};
 
 export default function play() {
-	type Type1 = SingleType<string[]>;
-	type Type2 = SingleType<number[]>;
-	type Type3 = SingleType<Person>;
-
-	type Type4 = string[][number];
+	const items: CustomArray<string> = ['1', '2', '3'];
+	const items2: CustomArray<number> = [1, 2, 3];
 }
