@@ -1,45 +1,13 @@
-// Playground Examples
-
 interface Person {
 	name: string;
 }
 
-interface Student extends Person {
-	age: number;
-}
-
-interface PostGraduateStudent extends Person {
-	age: number;
-	projects: string[];
-}
-
-type StudentInfo<T extends any = Student> = T extends Student
-	? {
-			data: T;
-			grades: number[];
-	  }
-	: string;
-
-// interface StudentInfo<T extends Student = Student> {
-// 	data: T;
-// 	grades: number[];
-// }
-
-type Car = { engine: string };
+type SingleType<T> = T extends any[] ? T[number] : unknown;
 
 export default function play() {
-	function logStudentInfo(info: StudentInfo<Car>) {
-		console.log(info);
-		console.log(info);
-	}
+	type Type1 = SingleType<string[]>;
+	type Type2 = SingleType<number[]>;
+	type Type3 = SingleType<Person>;
 
-	const info = {
-		data: {
-			name: 'Filip',
-			age: '',
-		},
-		grades: [1, 2, 3, 1],
-	};
-
-	logStudentInfo(info);
+	type Type4 = string[][number];
 }
