@@ -1,45 +1,27 @@
-// Playground Examples
+export default async function play() {
+	type Greeting = { message: string };
 
-interface Person {
-	name: string;
-}
+	type InferHelloProps<T> = T extends () => Promise<{ props: infer Props }>
+		? Props
+		: never;
 
-interface Student extends Person {
-	age: number;
-}
+	const getHelloProps = async function () {
+		const greeting: Greeting = { message: 'Hi Friends!' };
 
-interface PostGraduateStudent extends Person {
-	age: number;
-	projects: string[];
-}
-
-type StudentInfo<T extends any = Student> = T extends Student
-	? {
-			data: T;
-			grades: number[];
-	  }
-	: string;
-
-// interface StudentInfo<T extends Student = Student> {
-// 	data: T;
-// 	grades: number[];
-// }
-
-type Car = { engine: string };
-
-export default function play() {
-	function logStudentInfo(info: StudentInfo<Car>) {
-		console.log(info);
-		console.log(info);
-	}
-
-	const info = {
-		data: {
-			name: 'Filip',
-			age: '',
-		},
-		grades: [1, 2, 3, 1],
+		return {
+			props: {
+				greeting,
+				data: {
+					cars: ['cars1', 'cars2'],
+				},
+			},
+		};
 	};
 
-	logStudentInfo(info);
+	function sayHello(props: InferHelloProps<typeof getHelloProps>) {
+		console.log(props.data.cars);
+	}
+
+	const data = await getHelloProps();
+	sayHello(data.props);
 }
