@@ -1,13 +1,27 @@
-interface Person {
-	name: string;
-}
+export default async function play() {
+	type Greeting = { message: string };
 
-type ReturnType<T> = T extends () => infer R ? R : unknown;
+	type InferHelloProps<T> = T extends () => Promise<{ props: infer Props }>
+		? Props
+		: never;
 
-export default function play() {
-	function logger(a) {
-		return true;
+	const getHelloProps = async function () {
+		const greeting: Greeting = { message: 'Hi Friends!' };
+
+		return {
+			props: {
+				greeting,
+				data: {
+					cars: ['cars1', 'cars2'],
+				},
+			},
+		};
+	};
+
+	function sayHello(props: InferHelloProps<typeof getHelloProps>) {
+		console.log(props.data.cars);
 	}
 
-	const loggerReturn: ReturnType<typeof logger> = true;
+	const data = await getHelloProps();
+	sayHello(data.props);
 }
