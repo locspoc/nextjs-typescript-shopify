@@ -1,11 +1,8 @@
-import { useEffect } from 'react';
-import type {
-	InferGetServerSidePropsType,
-	InferGetStaticPropsType,
-} from 'next';
+import type { InferGetStaticPropsType } from 'next';
+import getAllProducts from '../framework/shopify/product/get-all-products';
 
 export async function getStaticProps() {
-	const products = [1, 2, 3];
+	const products = await getAllProducts();
 	return {
 		props: {
 			products,
@@ -16,6 +13,6 @@ export async function getStaticProps() {
 
 export default function Home({
 	products,
-}: InferGetServerSidePropsType<typeof getStaticProps>) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
 	return <div>{products}</div>;
 }
