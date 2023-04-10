@@ -40,3 +40,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ```
 npx create-next-app nextjs-typescript-shopify
 ```
+
+## 5. Next Shopify Local
+
+```
+https://github.com/Jerga99/next-shopify-local
+
+[Shopify GraphQL Storefront](https://shopify.dev/docs/storefront-api/reference)
+
+[Api Explorer](https://shopify.dev/graphiql/storefront-graphiql)
+```
