@@ -11,9 +11,12 @@ const getAllProducts = async (): Promise<any> => {
 		query: getAllProductsQuery,
 	});
 
-	// normalise and return new data!
+	const products =
+		data.products.edges.map(({ node: product }) => {
+			return product;
+		}) ?? [];
 
-	return data.products;
+	return products;
 };
 
 export default getAllProducts;
