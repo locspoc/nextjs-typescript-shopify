@@ -1,6 +1,16 @@
-import { Product as ShopifyProduct } from '../schema';
+import { ImageEdge, Product as ShopifyProduct } from '../schema';
 
 // regexr.com/
+
+const normalizeProductImages = ({ edges }: { edges: Array<ImageEdge> }) =>
+	// debugger;
+	edges.map(({ node: { originalSrc: url, ...rest } }) =>
+		// debugger;
+		({
+			url: `/images/${url}`,
+			...rest,
+		})
+	);
 
 export function normalizeProduct(productNode: ShopifyProduct): any {
 	const {
@@ -9,6 +19,7 @@ export function normalizeProduct(productNode: ShopifyProduct): any {
 		handle,
 		vendor,
 		description,
+		images: imageConnection,
 		...rest
 	} = productNode;
 
@@ -19,6 +30,7 @@ export function normalizeProduct(productNode: ShopifyProduct): any {
 		description,
 		path: `/${handle}`,
 		slug: handle.replace(/^\/+|\/+$/g, ''),
+		images: normalizeProductImages(imageConnection),
 		...rest,
 	};
 
