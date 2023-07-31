@@ -50,3 +50,9 @@ https://github.com/Jerga99/next-shopify-local
 
 [Api Explorer](https://shopify.dev/graphiql/storefront-graphiql)
 ```
+
+## 6. Deep Merge
+
+```
+npm install --save-dev deepmerge
+```
